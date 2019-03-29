@@ -39,3 +39,13 @@ In theory, you should also be able to run:
         catkin_make run_tests
         
 But that complains that the tests don't return results at the moment- I'll figure it out some other time.
+
+## What are the takeaways?
+
+In `package.xml`:
+
+    <build_depend>rostest</build_depend>
+
+In `CMakeLists.txt`:
+
+    
