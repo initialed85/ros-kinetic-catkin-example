@@ -45,7 +45,6 @@ class TopicPublisherSubscribertest(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    import sys
     import rostest
 
-    rostest.rosrun(PKG, NODE_NAME, TopicPublisherSubscribertest, sys.argv)
+    rostest.rosrun(PKG, NODE_NAME, TopicPublisherSubscribertest)
