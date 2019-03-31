@@ -2,6 +2,7 @@
 
 import unittest
 
+import rospy
 from example.msg import ExampleMessage
 from example.srv import *
 
@@ -12,8 +13,6 @@ SERVICE_NAME = 'service'
 
 _first_name = 'Edward'
 _last_name = 'Beech'
-
-import rospy
 
 
 class TopicPublisherSubscribertest(unittest.TestCase):
