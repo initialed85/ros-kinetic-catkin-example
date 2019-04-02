@@ -163,10 +163,10 @@ include_directories(
 ## in contrast to setup.py, you can choose the destination
 install(
         PROGRAMS
-        scripts/service_caller.py
-        scripts/service_hoster.py
-        scripts/topic_publisher.py
-        scripts/topic_subscriber.py
+        nodes/service_caller.py
+        nodes/service_hoster.py
+        nodes/topic_publisher.py
+        nodes/topic_subscriber.py
         test/everything_test.py
         DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
