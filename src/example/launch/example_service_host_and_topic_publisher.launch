@@ -1,0 +1,6 @@
+<launch>
+
+    <node name="topic_publisher" pkg="example" type="topic_publisher.py"/>
+    <node name="service_hoster" pkg="example" type="service_hoster.py"/>
+
+</launch>

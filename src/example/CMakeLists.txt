@@ -7,13 +7,14 @@ project(example)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED COMPONENTS
+find_package(
+        catkin REQUIRED COMPONENTS
         roscpp
         rospy
         rostest
         std_msgs
         message_generation
-        )
+)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -160,10 +161,15 @@ include_directories(
 
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
-# install(PROGRAMS
-#   scripts/my_python_script
-#   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-# )
+install(
+        PROGRAMS
+        scripts/service_caller.py
+        scripts/service_hoster.py
+        scripts/topic_publisher.py
+        scripts/topic_subscriber.py
+        test/everything_test.py
+        DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
 
 ## Mark executables and/or libraries for installation
 # install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_node
@@ -180,11 +186,14 @@ include_directories(
 # )
 
 ## Mark other files for installation (e.g. launch and bag files, etc.)
-# install(FILES
-#   # myfile1
-#   # myfile2
-#   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-# )
+install(
+        FILES
+        launch/example_service_host_and_topic_publisher.launch
+        launch/example_service_caller.launch
+        launch/example_topic_subscriber.launch
+        test/everything_test.launch
+        DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
 
 #############
 ## Testing ##
