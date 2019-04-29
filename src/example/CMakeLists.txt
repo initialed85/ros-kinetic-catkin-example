@@ -167,7 +167,7 @@ install(
         nodes/service_hoster.py
         nodes/topic_publisher.py
         nodes/topic_subscriber.py
-        test/everything_test.py
+        test/ros_kinetic_catkin_example_test.py
         DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
@@ -191,7 +191,7 @@ install(
         launch/example_service_host_and_topic_publisher.launch
         launch/example_service_caller.launch
         launch/example_topic_subscriber.launch
-        test/everything_test.launch
+        test/ros_kinetic_catkin_example_test.launch
         DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
@@ -209,5 +209,5 @@ install(
 # catkin_add_nosetests(test)
 
 if (CATKIN_ENABLE_TESTING)
-    add_rostest(test/everything_test.launch)
+    add_rostest(test/ros_kinetic_catkin_example_test.launch)
 endif ()

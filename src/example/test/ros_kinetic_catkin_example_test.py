@@ -15,7 +15,7 @@ _first_name = 'Edward'
 _last_name = 'Beech'
 
 
-class TopicPublisherSubscribertest(unittest.TestCase):
+class TopicPublishSubscriberTest(unittest.TestCase):
     def setUp(self):
         rospy.init_node(NODE_NAME)
 
@@ -43,7 +43,16 @@ class TopicPublisherSubscribertest(unittest.TestCase):
         self.assert_(data.score in [420, 1337, 8008135])
 
 
+class TopicPublishSubscriberSuite(unittest.TestSuite):
+    def __init__(self, *args, **kwargs):
+        super(TopicPublishSubscriberSuite).__init__(*args, **kwargs)
+
+
 if __name__ == '__main__':
     import rostest
 
-    rostest.rosrun(PKG, NODE_NAME, TopicPublisherSubscribertest)
+    rostest.rosrun(
+        PKG,
+        NODE_NAME,
+        TopicPublishSubscriberTest
+    )
