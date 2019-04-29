@@ -20,7 +20,7 @@ class TopicPublishSubscriberTest(unittest.TestCase):
         rospy.init_node(NODE_NAME)
 
     def test_topic_publisher(self):
-        data = rospy.wait_for_message(TOPIC_NAME, ExampleMessage, timeout=1)
+        data = rospy.wait_for_message(TOPIC_NAME, ExampleMessage, timeout=2)
 
         self.assert_(data.first_name == _first_name)
         self.assert_(data.last_name == _last_name)
@@ -29,7 +29,7 @@ class TopicPublishSubscriberTest(unittest.TestCase):
 
     def test_service_hoster(self):
         # wait for a message (it's a prerequisite for the service passing)
-        _ = rospy.wait_for_message(TOPIC_NAME, ExampleMessage, timeout=1)
+        _ = rospy.wait_for_message(TOPIC_NAME, ExampleMessage, timeout=2)
 
         rospy.wait_for_service(SERVICE_NAME, 1)
 
