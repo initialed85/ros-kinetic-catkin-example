@@ -1,16 +1,19 @@
 #include "ros/ros.h"
 #include "example/ExampleMessage.h"
 
+const std::string NODE_NAME = "topic_publisher";
+const std::string TOPIC_NAME = "topic";
+
 int rand_between(int min, int max) {
     return rand() % (max - min);
 }
 
 int main(int argc, char **argv) {
-    ros::init(argc, argv, "topic_publisher");
+    ros::init(argc, argv, NODE_NAME);
 
-    ros::NodeHandle n;
+    ros::NodeHandle nh;
 
-    ros::Publisher pub = n.advertise<example::ExampleMessage>("topic", 1000);
+    ros::Publisher pub = nh.advertise<example::ExampleMessage>(TOPIC_NAME, 1000);
 
     ros::Rate loop_rate(10);
 

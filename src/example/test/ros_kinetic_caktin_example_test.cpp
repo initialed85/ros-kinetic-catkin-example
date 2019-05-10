@@ -1,14 +1,76 @@
 #include <gtest/gtest.h>
 #include "ros/ros.h"
+#include "example/ExampleMessage.h"
+#include "example/ExampleService.h"
 
-TEST(SomeTestSuite, someTestCase
-) {
-    ASSERT_TRUE(true);
+std::shared_ptr <ros::NodeHandle> nh;
+
+const std::string TOPIC_NAME = "topic";
+const std::string SERVICE_NAME = "service";
+
+const std::string firstName = "Edward";
+const std::string lastName = "Beech";
+const int minAge = 0;
+const int permittedScores[3] = {420, 1337, 8008135};
+
+
+bool isInArray(const int item, const int items) {
+    for (int i = 0; i < sizeof(items); i ++) {
+        if (permittedScores[i] == item) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
-TEST(SomeTestSuite, otherTestCase
-) {
-    ASSERT_TRUE(false);
+TEST(SomeTestSuite, testTopicPublisher) {
+    // boost::shared_ptr<example::ExampleMessage const> sharedMsg;
+
+    example::ExampleMessage msg = *ros::topic::waitForMessage<example::ExampleMessage>(TOPIC_NAME, ros::Duration(3.0));
+
+    // example::ExampleMessage msg = *sharedMsg;
+
+    ASSERT_EQ(firstName, msg.first_name);
+    ASSERT_EQ(lastName, msg.last_name);
+    ASSERT_LT(minAge, msg.age);
+
+    bool found = false;
+    for (int i = 0; i < sizeof(permittedScores); i++) {
+        if (permittedScores[i] == msg.score) {
+            found = true;
+        }
+    }
+    ASSERT_TRUE(found);
+}
+
+TEST(SomeTestSuite, testServiceHost) {
+    bool serviceAvailable = ros::service::waitForService(SERVICE_NAME, ros::Duration(3.0));
+
+    ASSERT_TRUE(serviceAvailable);
+
+    ros::NodeHandle n = *nh;
+
+    ros::ServiceClient client = n.serviceClient<example::ExampleService>(SERVICE_NAME);
+
+    example::ExampleService srv;
+
+    srv.request.first_name = firstName;
+    srv.request.last_name = lastName;
+
+    ASSERT_TRUE(client.call(srv));
+
+    ASSERT_EQ(srv.response.first_name, firstName);
+    ASSERT_EQ(srv.response.last_name, lastName);
+    ASSERT_LT(minAge, srv.response.age);
+
+    bool found = false;
+    for (int i = 0; i < sizeof(permittedScores); i++) {
+        if (permittedScores[i] == srv.response.score) {
+            found = true;
+        }
+    }
+    ASSERT_TRUE(found);
 }
 
 int main(int argc, char **argv) {
@@ -16,7 +78,7 @@ int main(int argc, char **argv) {
 
     ros::init(argc, argv, "everything_test");
 
-    ros::NodeHandle n;
+    nh.reset(new ros::NodeHandle);
 
     return RUN_ALL_TESTS();
 }
