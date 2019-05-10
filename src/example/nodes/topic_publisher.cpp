@@ -4,7 +4,7 @@
 const std::string NODE_NAME = "topic_publisher";
 const std::string TOPIC_NAME = "topic";
 
-int rand_between(int min, int max) {
+unsigned char rand_between(int min, int max) {
     return rand() % (max - min);
 }
 

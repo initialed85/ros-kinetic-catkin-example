@@ -3,7 +3,7 @@
 #include "example/ExampleMessage.h"
 #include "example/ExampleService.h"
 
-std::shared_ptr <ros::NodeHandle> nh;
+std::shared_ptr<ros::NodeHandle> nh;
 
 const std::string TOPIC_NAME = "topic";
 const std::string SERVICE_NAME = "service";
@@ -15,7 +15,7 @@ const int permittedScores[3] = {420, 1337, 8008135};
 
 
 bool isInArray(const int item, const int items) {
-    for (int i = 0; i < sizeof(items); i ++) {
+    for (int i = 0; i < sizeof(items); i++) {
         if (permittedScores[i] == item) {
             return true;
         }
