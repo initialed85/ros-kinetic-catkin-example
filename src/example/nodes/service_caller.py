@@ -20,6 +20,7 @@ def run(first_name, last_name):
 
     try:
         data = service(first_name, last_name)
+
         rospy.loginfo(data)
     except rospy.ServiceException:
         rospy.logerr(traceback.format_exc())
@@ -33,7 +34,12 @@ if __name__ == '__main__':
             sys.argv[0]
         )
 
+        sys.exit(1)
+
+    _first_name = sys.argv[1]
+    _last_name = sys.argv[2]
+
     try:
-        run(sys.argv[1], sys.argv[2])
+        run(_first_name, _last_name)
     except rospy.ROSInterruptException:
         pass

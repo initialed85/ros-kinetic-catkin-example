@@ -22,25 +22,24 @@ class TopicPublishSubscriberTest(unittest.TestCase):
     def test_topic_publisher(self):
         data = rospy.wait_for_message(TOPIC_NAME, ExampleMessage, timeout=2)
 
-        self.assert_(data.first_name == _first_name)
-        self.assert_(data.last_name == _last_name)
-        self.assert_(data.age > 0)
-        self.assert_(data.score in [420, 1337, 8008135])
+        self.assertEqual(_first_name, data.first_name)
+        self.assertEqual(_last_name, data.last_name)
+        self.assertLess(0, data.age)
+        self.assertIn(data.score, [420, 1337, 8008135])
 
     def test_service_hoster(self):
-        # wait for a message (it's a prerequisite for the service passing)
         _ = rospy.wait_for_message(TOPIC_NAME, ExampleMessage, timeout=2)
 
         rospy.wait_for_service(SERVICE_NAME, 1)
 
-        service = rospy.ServiceProxy(SERVICE_NAME, ExampleService)
+        service_method = rospy.ServiceProxy(SERVICE_NAME, ExampleService)
 
-        data = service(_first_name, _last_name)
+        data = service_method(_first_name, _last_name)
 
-        self.assert_(data.first_name == _first_name)
-        self.assert_(data.last_name == _last_name)
-        self.assert_(data.age > 0)
-        self.assert_(data.score in [420, 1337, 8008135])
+        self.assert_(_first_name, data.first_name)
+        self.assert_(_last_name, data.last_name)
+        self.assertLess(0, data.age)
+        self.assertIn(data.score, [420, 1337, 8008135])
 
 
 class TopicPublishSubscriberSuite(unittest.TestSuite):
