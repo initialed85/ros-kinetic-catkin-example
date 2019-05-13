@@ -14,22 +14,8 @@ const int minAge = 0;
 const int permittedScores[3] = {420, 1337, 8008135};
 
 
-bool isInArray(const int item, const int items) {
-    for (int i = 0; i < sizeof(items); i++) {
-        if (permittedScores[i] == item) {
-            return true;
-        }
-    }
-
-    return false;
-}
-
 TEST(SomeTestSuite, testTopicPublisher) {
-    // boost::shared_ptr<example::ExampleMessage const> sharedMsg;
-
     example::ExampleMessage msg = *ros::topic::waitForMessage<example::ExampleMessage>(TOPIC_NAME, ros::Duration(3.0));
-
-    // example::ExampleMessage msg = *sharedMsg;
 
     ASSERT_EQ(firstName, msg.first_name);
     ASSERT_EQ(lastName, msg.last_name);
@@ -45,6 +31,8 @@ TEST(SomeTestSuite, testTopicPublisher) {
 }
 
 TEST(SomeTestSuite, testServiceHost) {
+    ros::topic::waitForMessage<example::ExampleMessage>(TOPIC_NAME, ros::Duration(3.0));
+
     bool serviceAvailable = ros::service::waitForService(SERVICE_NAME, ros::Duration(3.0));
 
     ASSERT_TRUE(serviceAvailable);
