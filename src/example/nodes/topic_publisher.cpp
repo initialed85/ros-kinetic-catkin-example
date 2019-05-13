@@ -1,6 +1,13 @@
 #include "ros/ros.h"
 #include "example/ExampleMessage.h"
 
+#include "HelloWorld/HelloWorldPublisher.h"
+
+
+using namespace eprosima::fastrtps;
+using namespace rtps;
+
+
 const std::string NODE_NAME = "topic_publisher";
 const std::string TOPIC_NAME = "topic";
 
@@ -9,6 +16,10 @@ unsigned int rand_between(int min, int max) {
 }
 
 int main(int argc, char **argv) {
+    HelloWorldPublisher helloWorldPublisher;
+
+    helloWorldPublisher.init();
+
     ros::init(argc, argv, NODE_NAME);
 
     ros::NodeHandle nh;
