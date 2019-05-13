@@ -2,7 +2,11 @@
 
 TAG=ros-kinetic-catkin-example
 
-docker build --no-cache -t ${TAG} .
+if [ "$1" == "force" ]; then
+    docker build -t ${TAG} --no-cache .
+else
+    docker build -t ${TAG} .
+fi
 
 docker run -d --name ${TAG} ${TAG}
 
