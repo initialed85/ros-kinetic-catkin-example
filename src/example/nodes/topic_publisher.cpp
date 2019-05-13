@@ -1,7 +1,7 @@
 #include "ros/ros.h"
 #include "example/ExampleMessage.h"
 
-#include "HelloWorld/HelloWorldPublisher.h"
+#include "HelloWorldPublisher.h"
 
 
 using namespace eprosima::fastrtps;
@@ -47,6 +47,8 @@ int main(int argc, char **argv) {
         );
 
         pub.publish(msg);
+
+        // helloWorldPublisher.publish();
 
         ros::spinOnce();
 
