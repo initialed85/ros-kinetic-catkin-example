@@ -2,7 +2,7 @@
 
 TAG=ros-kinetic-catkin-example
 
-docker build -t ${TAG} .
+docker build --no-cache -t ${TAG} .
 
 docker run -d --name ${TAG} ${TAG}
 
