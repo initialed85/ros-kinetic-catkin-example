@@ -46,3 +46,5 @@ If you want to use `catkin` to run the tests:
 
         catkin_make
         catkin_make run_tests
+
+?
