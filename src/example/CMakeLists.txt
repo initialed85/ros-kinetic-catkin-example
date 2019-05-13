@@ -41,8 +41,8 @@ include_directories(
 
 catkin_package(
         CATKIN_DEPENDS roscpp rospy std_msgs message_runtime
-        DEPENDS
-        INCLUDE_DIRS include
+        # DEPENDS
+        # INCLUDE_DIRS include
         LIBRARIES example HelloWorld
 )
 
