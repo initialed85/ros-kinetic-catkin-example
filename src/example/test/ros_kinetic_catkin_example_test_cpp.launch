@@ -4,5 +4,5 @@
     <node pkg="example" name="rtps_to_ros_gateway" type="example_rtps_to_ros_gateway"/>
     <node pkg="example" name="service_hoster" type="service_hoster.py"/>
 
-    <test pkg="example" test-name="ros_kinetic_catkin_example_cpp_test" type="example-test"/>
+    <test pkg="example" test-name="ros_kinetic_catkin_example_cpp_test_ide_t2855" type="example-test"/>
 </launch>
