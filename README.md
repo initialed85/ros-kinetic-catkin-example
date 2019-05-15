@@ -130,6 +130,8 @@ And also demonstrated (for `rostest`) through the naming of the `<test>` element
 
 And finally represented in the jUnit XML test results; e.g.:
 
-    # for rostest
+    # for rostest (NOTE: all wrapped up into 1 test)
+    <testsuite errors="0" failures="0" name="unittest.suite.TestSuite" tests="1" time="2.633"><testcase classname="rostest.runner.RosTest" name="testros_kinetic_catkin_example_cpp_test_ide_t2855" time="2.6330" /
     
-    # for rosunit
+    # for rosunit (NOTE: the 2 tests that are actually there)
+    <testsuites tests="2" failures="0" disabled="0" errors="0" timestamp="2019-05-15T11:22:43" time="0.485" name="AllTests">
