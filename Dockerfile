@@ -48,7 +48,6 @@ RUN echo "#!/usr/bin/env bash" > test.sh && \
     echo ". install/setup.sh" >> test.sh && \
     echo "catkin_make run_tests" >> test.sh && \
     echo "RETURNLEVEL=$?" >> test.sh && \
-    echo "rm -fr build/test_results/${PACKAGE}/rosunit-*.xml" >> test.sh && \
     echo "cp -frv build/test_results/${PACKAGE}/*.xml /srv/test_results/" >> test.sh && \
     echo "exit ${RETURNLEVEL}" >> test.sh && \
     chmod +x test.sh

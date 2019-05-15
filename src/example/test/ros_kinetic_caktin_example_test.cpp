@@ -71,8 +71,6 @@ TEST(SomeTestSuite, testServiceHost) {
         }
     }
     ASSERT_TRUE(found);
-
-    ASSERT_TRUE(false);
 }
 
 int main(int argc, char **argv) {
