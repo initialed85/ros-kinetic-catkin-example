@@ -98,6 +98,14 @@ int main(int argc, char **argv) {
         if (m_listener.msgAvailale) {
             example::ExampleMessage rosMsg;
 
+            ROS_INFO(
+                    "RTPS first_name=%s, last_name=%s, age=%i, score=%i",
+                    m_listener.lastMsg.first_name().c_str(),
+                    m_listener.lastMsg.last_name().c_str(),
+                    m_listener.lastMsg.age(),
+                    m_listener.lastMsg.score()
+            );
+
             rosMsg.first_name = m_listener.lastMsg.first_name();
             rosMsg.last_name = m_listener.lastMsg.last_name();
             rosMsg.age = m_listener.lastMsg.age();

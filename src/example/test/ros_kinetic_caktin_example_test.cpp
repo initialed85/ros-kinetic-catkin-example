@@ -14,7 +14,7 @@ const int minAge = 0;
 const int permittedScores[3] = {420, 1337, 8008135};
 
 
-TEST(SomeTestSuite, testTopicPublisher) {
+TEST(SomeTestSuite, testRTPSTopicPublisher) {
     boost::shared_ptr<const example::ExampleMessage> sharedMsg = ros::topic::waitForMessage<example::ExampleMessage>(
             TOPIC_NAME,
             ros::Duration(3.0)
