@@ -21,7 +21,7 @@ class TopicPublishSubscriberTest(unittest.TestCase):
     def setUp(self):
         rospy.init_node(NODE_NAME)
 
-    def test_topic_publisher(self):
+    def test_topic_publisher_ide_t2857(self):
         data = rospy.wait_for_message(TOPIC_NAME, ExampleMessage, timeout=3)
 
         self.assertEqual(_first_name, data.first_name)
@@ -29,7 +29,7 @@ class TopicPublishSubscriberTest(unittest.TestCase):
         self.assertLess(_min_age, data.age)
         self.assertIn(data.score, _permitted_scores)
 
-    def test_service_hoster(self):
+    def test_service_hoster_ide_t2858(self):
         _ = rospy.wait_for_message(TOPIC_NAME, ExampleMessage, timeout=3)
 
         rospy.wait_for_service(SERVICE_NAME, 1)
