@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="example" name="rtps_topic_publisher" type="example_rtps_topic_publisher"/>
+    <node pkg="example" name="rtps_to_ros_gateway" type="example_rtps_to_ros_gateway"/>
+    <node pkg="example" name="service_hoster" type="service_hoster.py"/>
+</launch>

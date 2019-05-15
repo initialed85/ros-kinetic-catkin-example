@@ -1,5 +1,0 @@
-<launch>
-
-    <node name="topic_subscriber" pkg="example" type="topic_subscriber.py"/>
-
-</launch>

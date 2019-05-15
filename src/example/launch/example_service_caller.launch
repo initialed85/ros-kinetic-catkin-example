@@ -1,5 +1,0 @@
-<launch>
-
-    <node name="server_caller" pkg="example" type="service_caller.py"/>
-
-</launch>

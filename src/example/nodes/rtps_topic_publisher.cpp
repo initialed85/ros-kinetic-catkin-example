@@ -78,7 +78,7 @@ int main(int argc, char **argv) {
         msg.score(scores[rand_between(0, 2)]);
 
         ROS_INFO(
-                "RTPS first_name=%s, last_name=%s, age=%i, score=%i",
+                "RTPS transmitting first_name=%s, last_name=%s, age=%i, score=%i",
                 msg.first_name().c_str(),
                 msg.last_name().c_str(),
                 msg.age(),

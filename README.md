@@ -10,21 +10,25 @@ The package is very contrived, it's comprised of the following:
 * Services
     * `ExampleService`
 * Nodes
-    * `topic_publisher.py`
-        * Publishes an `ExampleMessage` to `topic` with some fixed and random properties (Python version)
-    * `topic_publisher.cpp
-        * Publishes an `ExampleMessage` to `topic` with some fixed and random properties (C++ version)
-    * `topic_subscriber.py`
-        * Receives and logs `ExampleMessage` messages from `topic`
-    * `service_hoster.py`
-        * Receives `ExampleMessage` messages from `topic` and catalogues them by `first_name` and `last_name`, exposing that catalogue via `ExampleService`
-    * `service_caller.py`
-        * Calls the `ExampleService` service with the `first_name` and `last_name` provided on the command line
+    * Relevant
+        * `rtps_topic_publisher.cpp` (C++)
+            * Publishes an RTPS `ExampleMessage` message to RTPS `ExamplePubSubTopic` topic with some fixed and random properties
+        * `rtps_to_ros_gateway.cpp` (C++)
+            * Receives RTPS `ExampleMessage` messages from RTPS `ExamplePubSubTopic` topic and publishes a ROS `ExampleMessage` message to ROS `topic` topic
+        * `topic_subscriber.py` (Python)
+            * Receives and logs ROS `ExampleMessage` messages from ROS `topic` topic
+        * `service_hoster.py` (Python)
+            * Receives ROS `ExampleMessage` messages from ROS `topic` topic and catalogues them by `first_name` and `last_name`, exposing that catalogue via ROS `ExampleService` service
+        * `service_caller.py` (Python)
+            * Calls the ROS `ExampleService` service with the `first_name` and `last_name` provided on the command line
+    * Deprecated (context only)
+        * `topic_publisher.py` (Python)
+            * Publishes a ROS `ExampleMessage` message to ROS `topic` topic with some fixed and random properties
 * Tests
-    * `ros_kinetic_catkin_example_test.py`
-        * Instantiates `topic_publisher.cpp` and `service_hoster.py` and validates their behaviour (Python version)
-    * `ros_kinetic_catkin_example_test.py`
-        * Instantiates `topic_publisher.cpp` and `service_hoster.py` and validates their behaviour (C++ version)
+    * `ros_kinetic_catkin_example_test.cpp` (C++)
+        * Instantiates `rtps_topic_publisher.cpp`, `rtps_to_ros_gateway.cpp` and `service_hoster.py` and validates their behaviour (using C++ `gtest`)
+    * `ros_kinetic_catkin_example_test.py` (Python)
+        * Instantiates `rtps_topic_publisher.cpp`, `rtps_to_ros_gateway.cpp` and `service_hoster.py` and validates their behaviour (using Python `unittest`)
 
 ## How do I use it?
 
@@ -36,15 +40,13 @@ Before doing anything, ensure you have `ros-kinetic` installed and you're in the
 
 It should be as simple as the following (from the root of the repo):
 
-        # to run the Python tests
-        rostest example ros_kinetic_catkin_example_test_python.launch
-
         # to run the C++ tests
         rostest example ros_kinetic_catkin_example_test_cpp.launch
+
+        # to run the Python tests
+        rostest example ros_kinetic_catkin_example_test_python.launch
 
 If you want to use `catkin` to run the tests: 
 
         catkin_make
         catkin_make run_tests
-
-?

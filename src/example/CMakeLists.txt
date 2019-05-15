@@ -46,7 +46,7 @@ catkin_package(
         std_msgs
         message_runtime
 
-        # DEPENDS
+        DEPENDS
 
         INCLUDE_DIRS
         include
@@ -124,10 +124,9 @@ install(
 
 install(
         FILES
-        launch/example_service_host_and_topic_publisher.launch
-        launch/example_service_caller.launch
-        launch/example_topic_subscriber.launch
+        launch/example.launch
         test/ros_kinetic_catkin_example_test_python.launch
+        test/ros_kinetic_catkin_example_test_cpp.launch
         DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 

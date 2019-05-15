@@ -95,7 +95,7 @@ int main(int argc, char **argv) {
             example::ExampleMessage rosMsg;
 
             ROS_INFO(
-                    "RTPS first_name=%s, last_name=%s, age=%i, score=%i",
+                    "RTPS received first_name=%s, last_name=%s, age=%i, score=%i",
                     m_listener.lastMsg.first_name().c_str(),
                     m_listener.lastMsg.last_name().c_str(),
                     m_listener.lastMsg.age(),
@@ -108,7 +108,7 @@ int main(int argc, char **argv) {
             rosMsg.score = m_listener.lastMsg.score();
 
             ROS_INFO(
-                    "ROS first_name=%s, last_name=%s, age=%i, score=%i",
+                    "ROS transmitting first_name=%s, last_name=%s, age=%i, score=%i",
                     rosMsg.first_name.c_str(),
                     rosMsg.last_name.c_str(),
                     rosMsg.age,
