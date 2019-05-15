@@ -15,7 +15,14 @@ const int permittedScores[3] = {420, 1337, 8008135};
 
 
 TEST(SomeTestSuite, testTopicPublisher) {
-    example::ExampleMessage msg = *ros::topic::waitForMessage<example::ExampleMessage>(TOPIC_NAME, ros::Duration(3.0));
+    boost::shared_ptr<const example::ExampleMessage> sharedMsg = ros::topic::waitForMessage<example::ExampleMessage>(
+            TOPIC_NAME,
+            ros::Duration(3.0)
+    );
+
+    ASSERT_NE(nullptr, sharedMsg);
+
+    example::ExampleMessage msg = *sharedMsg;
 
     ASSERT_EQ(firstName, msg.first_name);
     ASSERT_EQ(lastName, msg.last_name);
@@ -31,7 +38,12 @@ TEST(SomeTestSuite, testTopicPublisher) {
 }
 
 TEST(SomeTestSuite, testServiceHost) {
-    ros::topic::waitForMessage<example::ExampleMessage>(TOPIC_NAME, ros::Duration(3.0));
+    boost::shared_ptr<const example::ExampleMessage> sharedMsg = ros::topic::waitForMessage<example::ExampleMessage>(
+            TOPIC_NAME,
+            ros::Duration(3.0)
+    );
+
+    ASSERT_NE(nullptr, sharedMsg);
 
     bool serviceAvailable = ros::service::waitForService(SERVICE_NAME, ros::Duration(3.0));
 

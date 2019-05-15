@@ -40,39 +40,65 @@ include_directories(
 )
 
 catkin_package(
-        CATKIN_DEPENDS roscpp rospy std_msgs message_runtime
+        CATKIN_DEPENDS
+        roscpp
+        rospy
+        std_msgs
+        message_runtime
+
         # DEPENDS
-        INCLUDE_DIRS include
-        LIBRARIES example HelloWorld
+
+        INCLUDE_DIRS
+        include
+
+        LIBRARIES
+        example
+        Example
 )
 
 add_library(
-        HelloWorld
-        src/HelloWorldPublisher.cxx
-        src/HelloWorldPubSubTypes.cxx
-        src/HelloWorld.cxx
+        Example
+        src/ExamplePubSubTypes.cxx
+        src/Example.cxx
 )
 
 target_link_libraries(
-        HelloWorld
+        Example
         fastcdr
         fastrtps
         ${catkin_LIBRARIES}
 )
 
 add_executable(
-        ${PROJECT_NAME}_topic_publisher
-        nodes/topic_publisher.cpp
+        ${PROJECT_NAME}_rtps_topic_publisher
+        nodes/rtps_topic_publisher.cpp
 )
 
 target_link_libraries(
-        ${PROJECT_NAME}_topic_publisher
-        HelloWorld
+        ${PROJECT_NAME}_rtps_topic_publisher
+        Example
         ${catkin_LIBRARIES}
 )
 
 add_dependencies(
-        ${PROJECT_NAME}_topic_publisher
+        ${PROJECT_NAME}_rtps_topic_publisher
+        ${${PROJECT_NAME}_EXPORTED_TARGETS}
+        ${catkin_EXPORTED_TARGETS}
+)
+
+add_executable(
+        ${PROJECT_NAME}_rtps_to_ros_gateway
+        nodes/rtps_to_ros_gateway.cpp
+)
+
+target_link_libraries(
+        ${PROJECT_NAME}_rtps_to_ros_gateway
+        Example
+        ${catkin_LIBRARIES}
+)
+
+add_dependencies(
+        ${PROJECT_NAME}_rtps_to_ros_gateway
         ${${PROJECT_NAME}_EXPORTED_TARGETS}
         ${catkin_EXPORTED_TARGETS}
 )
@@ -88,7 +114,9 @@ install(
 )
 
 install(
-        TARGETS ${PROJECT_NAME}_topic_publisher HelloWorld
+        TARGETS
+        ${PROJECT_NAME}_rtps_topic_publisher Example
+        ${PROJECT_NAME}_rtps_to_ros_gateway Example
         ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
         LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
         RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
@@ -112,7 +140,7 @@ if (CATKIN_ENABLE_TESTING)
 
     target_link_libraries(
             ${PROJECT_NAME}-test
-            HelloWorld
+            Example
             ${catkin_LIBRARIES}
     )
 

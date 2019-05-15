@@ -1,7 +1,8 @@
 <launch>
     <!--<node name="topic_publisher" pkg="example" type="topic_publisher.py"/> -->
-    <node name="topic_publisher" pkg="example" type="example_topic_publisher"/>
-    <node name="service_hoster" pkg="example" type="service_hoster.py"/>
+    <node pkg="example" name="rtps_topic_publisher" type="example_rtps_topic_publisher"/>
+    <node pkg="example" name="rtps_to_ros_gateway" type="example_rtps_to_ros_gateway"/>
+    <node pkg="example" name="service_hoster" type="service_hoster.py"/>
 
-    <test test-name="ros_kinetic_catkin_example_python_test" pkg="example" type="ros_kinetic_catkin_example_test.py"/>
+    <test pkg="example" test-name="ros_kinetic_catkin_example_python_test" type="ros_kinetic_catkin_example_test.py"/>
 </launch>
