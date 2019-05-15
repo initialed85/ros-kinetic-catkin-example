@@ -22,7 +22,7 @@ public:
     void onNewDataMessage(eprosima::fastrtps::Subscriber *sub) {
         ExampleMessage st;
 
-        if (!sub->takeNextData(&this->lastMsg, &m_info)) {
+        if (!sub->takeNextData(&st, &m_info)) {
             return;
         }
 
