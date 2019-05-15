@@ -19,9 +19,9 @@ const std::string TOPIC_NAME = "topic";
 
 class SubListener : public eprosima::fastrtps::SubscriberListener {
 public:
-    SubListener() {};
+    SubListener() = default;
 
-    ~SubListener() {};
+    ~SubListener() override = default;
 
     void onNewDataMessage(eprosima::fastrtps::Subscriber *sub) {
         ExampleMessage st;
