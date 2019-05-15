@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
-catkin_make run_tests
+source install/setup.bash
+
+catkin_make run_tests && catkin_test_results --all
 
 exit $?

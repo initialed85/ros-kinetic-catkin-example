@@ -43,6 +43,8 @@ class TopicPublishSubscriberTest(unittest.TestCase):
         self.assertLess(_min_age, data.age)
         self.assertIn(data.score, _permitted_scores)
 
+        self.assertTrue(False)
+
 
 class TopicPublishSubscriberSuite(unittest.TestSuite):
     def __init__(self, *args, **kwargs):
