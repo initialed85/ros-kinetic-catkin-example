@@ -16,10 +16,6 @@
 const std::string NODE_NAME = "rtps_topic_publisher";
 
 class PubListener : public eprosima::fastrtps::PublisherListener {
-public:
-    PubListener() = default;
-
-    ~PubListener() override = default;
 };
 
 unsigned int rand_between(int min, int max) {
