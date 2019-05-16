@@ -20,12 +20,12 @@ const double TARGET_SLEEP = ONE_SECOND_IN_MICROSECONDS / 10;
 
 volatile sig_atomic_t shutdown = 0;
 
+class PubListener : public eprosima::fastrtps::PublisherListener {
+};
+
 void handler(int signum) {
     shutdown = signum;
 }
-
-class PubListener : public eprosima::fastrtps::PublisherListener {
-};
 
 unsigned int rand_between(int min, int max) {
     return (unsigned int) (rand() % (max - min));
