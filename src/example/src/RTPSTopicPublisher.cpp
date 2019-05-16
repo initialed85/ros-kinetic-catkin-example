@@ -1,5 +1,8 @@
-#include "ros/ros.h"
-#include "example/ExampleMessage.h"
+#include <chrono>
+#include <signal.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <time.h>
 
 #include <fastrtps/participant/Participant.h>
 #include <fastrtps/attributes/ParticipantAttributes.h>
@@ -12,14 +15,24 @@
 #include "Example.h"
 #include "ExamplePubSubTypes.h"
 
+const double ONE_SECOND_IN_MICROSECONDS = 1000000;
+const double TARGET_SLEEP = ONE_SECOND_IN_MICROSECONDS / 10;
 
-const std::string NODE_NAME = "rtps_topic_publisher";
+volatile sig_atomic_t shutdown = 0;
+
+void handler(int signum) {
+    shutdown = signum;
+}
 
 class PubListener : public eprosima::fastrtps::PublisherListener {
 };
 
 unsigned int rand_between(int min, int max) {
-    return rand() % (max - min);
+    return (unsigned int) (rand() % (max - min));
+}
+
+double now() {
+    return std::chrono::duration<double>(std::chrono::system_clock::now().time_since_epoch()).count();
 }
 
 int main(int argc, char **argv) {
@@ -54,17 +67,17 @@ int main(int argc, char **argv) {
     );
 
     //
-    // ROS init
+    // main loop
     //
 
-    ros::init(argc, argv, NODE_NAME);
+    signal(SIGINT, handler);
 
-    ros::NodeHandle nh;
+    double before, after;
 
-    ros::Rate loop_rate(10);
+    int scores[3] = {420, 1337, 8008135};
 
-    while (ros::ok()) {
-        int scores[3] = {420, 1337, 8008135};
+    while (shutdown == 0) {
+        before = now();
 
         //
         // publish Fast-RTPS message
@@ -74,11 +87,12 @@ int main(int argc, char **argv) {
 
         msg.first_name("Edward");
         msg.last_name("Beech");
-        msg.age(rand_between(1, 100));
-        msg.score(scores[rand_between(0, 2)]);
+        msg.age((uint8_t) rand_between(1, 100));
+        msg.score((uint32_t) scores[rand_between(0, 2)]);
 
-        ROS_INFO(
-                "RTPS transmitting first_name=%s, last_name=%s, age=%i, score=%i",
+        printf(
+                "[ INFO] [%lf] RTPS transmitting first_name=%s, last_name=%s, age=%i, score=%i\n",
+                now(),
                 msg.first_name().c_str(),
                 msg.last_name().c_str(),
                 msg.age(),
@@ -91,9 +105,9 @@ int main(int argc, char **argv) {
         // sleep
         //
 
-        ros::spinOnce();
+        after = now();
 
-        loop_rate.sleep();
+        usleep((__useconds_t) (TARGET_SLEEP - ((after - before) * ONE_SECOND_IN_MICROSECONDS)));
     }
 
     return 0;

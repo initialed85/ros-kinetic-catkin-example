@@ -14,6 +14,7 @@ const int minAge = 0;
 const int permittedScores[3] = {420, 1337, 8008135};
 
 
+// note the TM4J test case number (IdeTnnnn); if you copy and paste this code, be sure to update or remove this
 TEST(SomeTestSuite, testRTPSTopicPublisherIdeT2859) {
     boost::shared_ptr<const example::ExampleMessage> sharedMsg = ros::topic::waitForMessage<example::ExampleMessage>(
             TOPIC_NAME,
@@ -37,6 +38,7 @@ TEST(SomeTestSuite, testRTPSTopicPublisherIdeT2859) {
     ASSERT_TRUE(found);
 }
 
+// note the TM4J test case number (IdeTnnnn); if you copy and paste this code, be sure to update or remove this
 TEST(SomeTestSuite, testServiceHostIdeT2860) {
     boost::shared_ptr<const example::ExampleMessage> sharedMsg = ros::topic::waitForMessage<example::ExampleMessage>(
             TOPIC_NAME,

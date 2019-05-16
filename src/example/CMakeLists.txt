@@ -15,7 +15,7 @@ find_package(
         message_generation
 )
 
-# required by (part of) Fast-RTPS
+# part of Fast-RTPS
 find_package(fastcdr REQUIRED)
 
 # Fast-RTPS itself
@@ -45,6 +45,7 @@ include_directories(
         ${catkin_INCLUDE_DIRS}
 )
 
+# standard ROS- package details
 catkin_package(
         CATKIN_DEPENDS
         roscpp
@@ -62,14 +63,14 @@ catkin_package(
         Example # our Fast-RTPS message library
 )
 
-# build our Fast-RTPS message library
+# build our Fast-RTPS message library (copy, paste and modify if you add more RTPS messages)
 add_library(
         Example
         src/ExamplePubSubTypes.cxx
         src/Example.cxx
 )
 
-# link it to the Fast-RTPS dependencies
+# link it to the Fast-RTPS dependencies (copy, paste and modify if you add more RTPS messages)
 target_link_libraries(
         Example
         fastcdr
@@ -77,10 +78,10 @@ target_link_libraries(
         ${catkin_LIBRARIES}
 )
 
-# build the C++ ROS node that publishes via Fast-RTPS
+# build the C++ application that publishes via Fast-RTPS
 add_executable(
         ${PROJECT_NAME}_rtps_topic_publisher
-        nodes/rtps_topic_publisher.cpp
+        src/RTPSTopicPublisher.cpp
 )
 
 # link it to our Fast-RTPS message library
@@ -117,18 +118,17 @@ add_dependencies(
         ${catkin_EXPORTED_TARGETS}
 )
 
-# install all our Python ROS nodes and Python tests
+# install all our Python ROS nodes
 install(
         PROGRAMS
         nodes/service_caller.py
         nodes/service_hoster.py
         nodes/topic_publisher.py
         nodes/topic_subscriber.py
-        test/ros_kinetic_catkin_example_test.py
         DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
-# install our built C++ ROS nodes
+# install our built C++ app and C++ ROS node
 install(
         TARGETS
         ${PROJECT_NAME}_rtps_topic_publisher Example
@@ -142,21 +142,34 @@ install(
 install(
         FILES
         launch/example.launch
-        test/ros_kinetic_catkin_example_test_python.launch
-        test/ros_kinetic_catkin_example_test_cpp.launch
         DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
 # only while under test
 if (CATKIN_ENABLE_TESTING)
+    # install our Python tests
+    install(
+            PROGRAMS
+            test/ros_kinetic_catkin_example_test.py
+            DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+    )
+
+    # install our test .launch files
+    install(
+            FILES
+            test/ros_kinetic_catkin_example_test_python.launch
+            test/ros_kinetic_catkin_example_test_cpp.launch
+            DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+    )
+
     # tell rostest to test some C++ code using gtest
     add_rostest_gtest(
             ${PROJECT_NAME}-test # the name of the test executable to be generated
             test/ros_kinetic_catkin_example_test_cpp.launch # .launch file that describes the setup and execution
-            test/ros_kinetic_caktin_example_test.cpp # test file that describes the actual tests
+            test/ROSKineticCatkinExampleTest.cpp # test file that describes the actual tests
     )
 
-    # link it to our Fast-RTPS message library
+    # link it to our Fast-RTPS message library (copy, paste and ensure to modify "-test" line to add more tests)
     target_link_libraries(
             ${PROJECT_NAME}-test
             Example

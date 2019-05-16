@@ -41,4 +41,5 @@ COPY src /srv/${PACKAGE}/src
 
 RUN mkdir /srv/test_results
 
+# leave the container running
 CMD tail -f /dev/null

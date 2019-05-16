@@ -21,6 +21,7 @@ class TopicPublishSubscriberTest(unittest.TestCase):
     def setUp(self):
         rospy.init_node(NODE_NAME)
 
+    # note the TM4J test case number (ide_tnnnn); if you copy and paste this code, be sure to update or remove this
     def test_topic_publisher_ide_t2857(self):
         data = rospy.wait_for_message(TOPIC_NAME, ExampleMessage, timeout=3)
 
@@ -29,6 +30,7 @@ class TopicPublishSubscriberTest(unittest.TestCase):
         self.assertLess(_min_age, data.age)
         self.assertIn(data.score, _permitted_scores)
 
+    # note the TM4J test case number (ide_tnnnn); if you copy and paste this code, be sure to update or remove this
     def test_service_hoster_ide_t2858(self):
         _ = rospy.wait_for_message(TOPIC_NAME, ExampleMessage, timeout=3)
 
